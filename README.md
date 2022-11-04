@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Quro Care 👋</h1>
+<h1 align="center">Welcome to YourCare_HMS 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/INVIII/QuroCare#readme" target="_blank">
@@ -14,7 +14,7 @@
 
 > A hospital management application
 
-### 🏠 [Homepage](https://github.com/INVIII/QuroCare#readme)
+### 🏠 [Homepage](https://github.com/jatin142002/YourCare_HMS#readme)
 
 ## Install
 
@@ -36,18 +36,6 @@ npm run test
 
 ## Author
 
-* Github: [@INVII](https://github.com/INVIII)
-
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/INVIII/QuroCare/issues). You can also take a look at the [contributing guide](https://github.com/INVIII/QuroCare/blob/master/CONTRIBUTING.md).
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-## 📝 License
-
-This project is [GNU](https://github.com/INVIII/QuroCare/blob/master/LICENSE) licensed.
+* Github: [@jatin142002](https://github.com/jatin142002)
 
 ***
