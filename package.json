@@ -1,0 +1,25 @@
+{
+  "name": "qurocare",
+  "version": "1.0.0",
+  "description": "A hospital management application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd server && npm start",
+    "install": "cd server && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/INVIII/QuroCare.git"
+  },
+  "authors": [
+    "Lawful2002",
+    "Ayushsunny",
+    "Dev5902"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/INVIII/QuroCare/issues"
+  },
+  "homepage": "https://github.com/INVIII/QuroCare#readme"
+}

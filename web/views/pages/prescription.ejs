@@ -1,0 +1,164 @@
+<%- include('../partials/dash-head.ejs') %>
+
+<% if (warning && warning.length) { %> 
+<div class="myAlert-bottom alert alert-warning d-flex flex-row justify-content-between align-items-center">
+    <div class="d-flex flex-row justify-content-between align-items-center">
+        <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <%= warning %> 
+    </div>
+  <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close">&times;</a>
+</div>
+
+<% } else if (success && success.length) { %>
+<div
+  class="
+    myAlert-bottom
+    alert alert-success
+    d-flex
+    flex-row
+    justify-content-between
+    align-items-center
+  "
+>
+  <div class="d-flex flex-row justify-content-between align-items-center">
+    <svg
+      class="bi flex-shrink-0 me-2 mr-3"
+      width="24"
+      height="24"
+      role="img"
+      aria-label="Success:"
+    >
+      <use xlink:href="#check-circle-fill" />
+    </svg>
+    <%= success %>
+  </div>
+  <a href="#" class="close mb-1" data-dismiss="alert" aria-label="close"
+    >&times;</a
+  >
+</div>
+<% } %> 
+
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top side-nav bg-dark" id="mainNav">
+        <img src="/images/toplogo.png" class="logo" />
+
+        <div class="collapse navbar-collapse " id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav bg-dark" id="exampleAccordion">
+                <li class="nav-item mt-4" data-toggle="tooltip" data-placement="right" title="Dashboards">
+                    <a class="nav-link" href="/">
+                        <i class="fa fa-fw fa-home"></i>
+                        <span class="nav-link-text">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="/patient/dashboard">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                    <a class="nav-link" href="/patient/prescription">
+                        <i class="fa fa-fw fa-file-pdf-o"></i>
+                        <span class="nav-link-text">My Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="addPatient">
+                    <a class="nav-link" href="index.html">
+                        <i class="fa fa-fw fa-wrench"></i>
+                        <span class="nav-link-text">Settings</span>
+                    </a>
+                </li>
+            </ul>          
+
+            <ul class="navbar-nav sidenav-toggler bg-dark">
+                <li class="nav-item text-center" style="color: aliceblue;">
+                    <%= name[0].fname %>&nbsp;<%= name[0].lname %>
+                    <a class="nav-link">                        
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i><span>Logout</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Doctors</li>
+            </ol>
+
+
+            <!-- Table with patients in rooms-->
+            <div class="row" style="margin-top: 50px">
+                <div class="table-responsive col-md-12">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Prescriptions
+                    </div>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>                                
+                                <th>Sr No.</th>
+                                <th>Doctor's Name</th>
+                                <th>Disease</th>
+                                <th>Allergies</th>
+                                <th>Feedback</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (prescription && prescription.length !== 0)  { %> 
+                                <% let index = 0 %> 
+                                <% for (let i of prescription) {%> 
+                                <tr>
+                                    <td><%- index+=1 %> </td>
+                                    <td><%- (i.fname + " " + i.lname) %></td>
+                                    <td><%- i.disease %></td>
+                                    <td><%- i.allergies %></td>
+                                    <td><%- i.feedback %></td>
+                                </tr>
+                                <% } %>
+                            <% } else { %> 
+                                There are no Prescriptions
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+
+            <!-- Logout Modal-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Select "Logout" below if you are ready to end your current session.
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                                Cancel
+                            </button>
+                            <form action="/patient/logout" method="POST"><button class="btn btn-primary">Logout</button></form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('../partials/dash-foot.ejs') %>
+    </div>

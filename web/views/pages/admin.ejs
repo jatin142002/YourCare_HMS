@@ -1,0 +1,265 @@
+<%- include('../partials/dash-head.ejs') %>
+
+<!-- <body class="fixed-nav sticky-footer side-nav" id="page-top"> -->
+
+<!-- Navigation-->
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top side-nav"
+  id="mainNav"
+>
+  <img src="/images/toplogo.png" class="logo" />
+
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul
+      class="navbar-nav navbar-sidenav bg-dark navbar-bottom"
+      id="exampleAccordion"
+    >
+      <li
+        class="nav-item mt-4"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="Dashboards"
+      >
+        <a class="nav-link" href="/">
+          <i class="fa fa-fw fa-home"></i>
+          <span class="nav-link-text">Home</span>
+        </a>
+      </li>
+      <li
+        class="nav-item"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="Dashboard"
+      >
+        <a class="nav-link" href="./dashboard">
+          <i class="fa fa-fw fa-dashboard"></i>
+          <span class="nav-link-text">Dashboard</span>
+        </a>
+      </li>
+      <li
+        class="nav-item"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="addDoctor"
+      >
+        <a class="nav-link" href="./register">
+          <i class="fa fa-fw fa-user-md"></i>
+          <span class="nav-link-text">Add Doctor</span>
+        </a>
+      </li>
+      <li
+        class="nav-item"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="addroom"
+      >
+        <a class="nav-link" href="./addroom">
+          <i class="fa fa-fw fa-wheelchair"></i>
+          <span class="nav-link-text">Add Room</span>
+        </a>
+      </li>
+      <li
+        class="nav-item"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="allocateRoom"
+      >
+        <a class="nav-link" href="./allocateroom">
+          <i class="fa fa-fw fa-wheelchair"></i>
+          <span class="nav-link-text"> Allocate Rooms </span>
+        </a>
+      </li>
+      <li
+        class="nav-item"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="Charts"
+      >
+        <a class="nav-link" href="charts.html">
+          <i class="fa fa-fw fa-area-chart"></i>
+          <span class="nav-link-text">Add Schedule</span>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav sidenav-toggler bg-dark navbar-bottom">
+      <li class="nav-item text-center" style="color: aliceblue">
+        Admin
+        <a class="nav-link"> </a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          <i class="fa fa-fw fa-sign-out"></i><span>Logout</span></a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active">Doctors</li>
+    </ol>
+    <!-- Icon Cards-->
+    <div class="row">
+      <div class="col-lg-4 col-md-4">
+        <div class="card text-white bg-primary o-hidden h-100">
+          <div class="card-body">
+            <div class="card-body-icon">
+              <i class="fa fa-hotel fa-3x"></i>
+            </div>
+            <div class="mr-5">
+              <h4><%- admitted.length %> Patients Admitted</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <div class="card text-white bg-warning o-hidden h-100">
+          <div class="card-body">
+            <div class="card-body-icon">
+              <i class="fa fa-child fa-3x"></i>
+            </div>
+            <div class="mr-5">
+              <h4><%- waiting.length %> Patients Waiting</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <div class="card text-white bg-success o-hidden h-100">
+          <div class="card-body">
+            <div class="card-body-icon">
+              <i class="fa fa-hospital-o fa-3x"></i>
+            </div>
+            <div class="mr-5">
+              <h4><%- freerooms.length %> Free Beds!</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table with patients in rooms-->
+    <div class="row" style="margin-top: 50px">
+      <div class="table-responsive col-md-6">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Admitted Patients
+        </div>
+
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th>Patient Name</th>
+              <th>Room ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <% if (admitted && admitted.length !== 0)  { %> 
+                <% let index = 0 %> 
+                  <% for (let i of admitted) {%>
+                      <tr>
+                        <td><%- i.fname + ' ' + i.lname %></td>
+                        <td><%- i.roomid %></td>
+                      </tr>
+                  <% } %>
+              <% } %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-responsive col-md-4">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Patients Waiting
+        </div>
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th>Patient Name</th>
+              <th>Recommended By</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (waiting && waiting.length !== 0)  { %> 
+                <% let index = 0 %> 
+                  <% for (let i of waiting) {%>
+                      <tr>
+                        <td><%- i.pfname + ' ' + i.plname %></td>
+                        <td><%- i.dfname + ' ' + i.dlname %></td>
+                      </tr>
+                  <% } %>
+              <% } %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-2">
+        <div class="card-header"><i class="fa fa-table"></i> OPD Details</div>
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+          <thead>
+            <tr>
+              <th>Free Rooms</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (freerooms && freerooms.length !== 0)  { %> 
+                <% let index = 0 %> 
+                <% for (let i of freerooms) {%>
+                  <tr>
+                    <td><%- i.roomid %></td>
+                  </tr>
+              <% } %>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Select "Logout" below if you are ready to end your current session.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                    Cancel
+                </button>
+                <form action="/admin/logout" method="POST"><button class="btn btn-primary">Logout</button></form>
+            </div>
+        </div>
+    </div>
+</div>
+  </div>
+</div>
+<%- include('../partials/dash-foot.ejs') %>
